@@ -1,0 +1,4 @@
+spring:
+  main:
+    web-application-type: NONE
+    banner-mode: "off"
