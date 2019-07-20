@@ -33,6 +33,13 @@ public class ZipRangeTest {
     }
 
     @Test
+    public void testEquals() {
+        ZipRange zipRange = new ZipRange(55664, 66544);
+        boolean isEquals = classUnderTest.equals(zipRange);
+        assertTrue("Failed to check the equality", isEquals);
+    }
+
+    @Test
     public void testZipCode() {
 
         ZipRange zipRange = new ZipRange(66455, 67744);

@@ -24,25 +24,25 @@ public class ZipExtractorImpl implements ZipExtractorService<ZipRange> {
     public static final Pattern ZIPCODE_PATTERN = Pattern.compile("\\[(\\d{5}),(\\d{5})\\]");
 
     /**
-     * @param zipRange Input of zipRange
+     * @param zipRangesArr Input of zipRangesArr
      * @return Return the collections of Zip Range
      * @throws ParamException   Invalid param exception
      * @throws InvalidException Invalid exception
      */
     @Override
-    public Collection<ZipRange> extractZipRange(String[] zipRange)
+    public Collection<ZipRange> extractZipRange(String[] zipRangesArr)
             throws ParamException, InvalidException {
         Collection<ZipRange> zipRangeSet = new HashSet<>();
 
-        if (zipRange == null) {
+        if (zipRangesArr == null || zipRangesArr.length == 0) {
             // Invalid param exception for the zipRanges
-            throw new ParamException("Invalid input param exception");
+            throw new ParamException("Invalid input param exception.");
         } else {
-            IntStream.range(0, zipRange.length)
+            IntStream.range(0, zipRangesArr.length)
                     .forEach(
                             index -> {
                                 // Remove all the white spaces if there
-                                Matcher matcher = ZIPCODE_PATTERN.matcher(zipRange[index].replaceAll(" ", ""));
+                                Matcher matcher = ZIPCODE_PATTERN.matcher(zipRangesArr[index].replaceAll(" ", ""));
                                 if (matcher.find()) {
                                     final int lowerBound = Integer.parseInt(matcher.group(1));
                                     final int upperBound = Integer.parseInt(matcher.group(2));
@@ -62,7 +62,7 @@ public class ZipExtractorImpl implements ZipExtractorService<ZipRange> {
                                     zipRangeSet.add(range);
                                 } else {
                                     throw new InvalidException(
-                                            String.join(" ", "Invalid parameter{}", zipRange[index]));
+                                            String.join(" ", "Invalid parameter", zipRangesArr[index]));
                                 }
                             });
         }
