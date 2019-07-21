@@ -19,6 +19,7 @@ public class ZipMergeImpl implements ZipMergeService {
      */
     @Override
     public Collection<ZipRange> mergeZipRanges(Collection<ZipRange> zipRanges) {
+        log.trace("Starting  mergeZipRanges(Collection<ZipRange> zipRanges)");
         if (null == zipRanges || zipRanges.size() == 0) {
             return Collections.EMPTY_LIST;
         }
@@ -41,7 +42,7 @@ public class ZipMergeImpl implements ZipMergeService {
                 iterator.remove();
             }
         }
-
+        log.trace("Ending  mergeZipRanges(Collection<ZipRange> zipRanges)");
         return sortedSet;
     }
 

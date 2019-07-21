@@ -92,4 +92,15 @@ public class ZipExtractorImplTest {
                 extractZipRange.stream().map(ZipRange::toString).collect(Collectors.joining(" ")));
         Assert.assertFalse("Ranges are empty which is not expected.", extractZipRange.isEmpty());
     }
+    @Test
+    public void testExtractZipRangeInvalidExceptionAndViolations() {
+        testZipRangesArr = new String[]{"[00000,95586]", "[45112,46556]", "[66356,67556]"};
+        expectedException.expect(InvalidException.class);
+        expectedException.expectMessage("Zip should be between");
+        Collection<ZipRange> extractZipRange = classUnderTest.extractZipRange(testZipRangesArr);
+        log.error(
+                "Processed Zip Ranges - {}",
+                extractZipRange.stream().map(ZipRange::toString).collect(Collectors.joining(" ")));
+        Assert.assertFalse("Ranges are empty which is not expected.", extractZipRange.isEmpty());
+    }
 }
