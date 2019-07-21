@@ -44,7 +44,7 @@ public class ZipCodeChallengeApplication implements CommandLineRunner {
                 mergeService.mergeZipRanges(zipExtractorService.extractZipRange(inputParams));
 
         log.info(
-                "Zip Stream {}",
+                "Consolidated Zip Ranges -  {}",
                 mergeZipRanges.stream().map(ZipRange::toString).collect(Collectors.joining(" ")));
     }
 }

@@ -34,8 +34,41 @@ For implementation, used below pattern and approach to achieve efficiency and si
 - Spring boot auto configuration management which is easy to manage and configure.
 
 
-### How to run
+### How to 
+
+### Build
+`
+mvn clean install
+`
+
+### Run
+###### Syntax
+`
+java -jar {jar file path}/{jar filename}.jar -z={space separated zip ranges}
+`
+###### Example 
+`
+java -jar target/zipcode-challenge-0.0.1-SNAPSHOT.jar -z="[94133,94133] [94200,94299] [94600,94699]"
+`
+From Project root location, you can also use below command 
+
+`
+java -jar target/zipcode-challenge-0.0.1-SNAPSHOT.jar -z="[94133,94133] [94200,94299] [94600,94699]"
+`
 
 
+
+
+##Output
+
+``` EMACS
+C:\IdeaProjects\ZipCodeChallenge> java -jar target/zipcode-challenge-0.0.1-SNAPSHOT.jar -z="[94133,94133] [94200,94299] [94226,94399]"
+
+2019-07-20 19:05:33.464  INFO 6772 --- [           main] c.a.w.z.ZipCodeChallengeApplication      : No active profile set, falling back to default profiles: default
+2019-07-20 19:05:33.970  INFO 6772 --- [           main] c.a.w.z.ZipCodeChallengeApplication      : Started ZipCodeChallengeApplication in 0.898 seconds (JVM running for 1.215)
+2019-07-20 19:05:33.971  INFO 6772 --- [           main] c.a.w.z.ZipCodeChallengeApplication      : Args received count 1
+2019-07-20 19:05:33.978  INFO 6772 --- [           main] c.a.w.z.handlers.CommandLineProcessor    : Parsed the values and returning the array params
+2019-07-20 19:05:34.035  INFO 6772 --- [           main] c.a.w.z.ZipCodeChallengeApplication      : Consolidated Zip Ranges -  [94133,94133] [94200,94399]
+```
 
 ##### © Ashutosh Gupta
