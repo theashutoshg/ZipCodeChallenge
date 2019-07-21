@@ -50,6 +50,7 @@ java -jar {jar file path}/{jar filename}.jar -z={space separated zip ranges}
 `
 java -jar target/zipcode-challenge-0.0.1-SNAPSHOT.jar -z="[94133,94133] [94200,94299] [94600,94699]"
 `
+
 From Project root location, you can also use below command 
 
 `
