@@ -32,6 +32,7 @@ public class ZipExtractorImpl implements ZipExtractorService<ZipRange> {
     @Override
     public Collection<ZipRange> extractZipRange(String[] zipRangesArr)
             throws ParamException, InvalidException {
+        log.trace("Started Collection<ZipRange> extractZipRange(String[] zipRangesArr)");
         Collection<ZipRange> zipRangeSet = new HashSet<>();
 
         if (zipRangesArr == null || zipRangesArr.length == 0) {
@@ -66,6 +67,7 @@ public class ZipExtractorImpl implements ZipExtractorService<ZipRange> {
                                 }
                             });
         }
+        log.trace("End Collection<ZipRange> extractZipRange(String[] zipRangesArr)");
         return zipRangeSet;
     }
 }

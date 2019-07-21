@@ -19,6 +19,7 @@ public class CommandLineProcessor {
     }
 
     private String[] validateAndFetchOptions(String[] args) throws ParseException {
+        log.trace("Started validateAndFetchOptions(String[] args)");
         CommandLine cmd;
         HelpFormatter formatter = new HelpFormatter();
         CommandLineParser parser = new DefaultParser();
@@ -28,15 +29,20 @@ public class CommandLineProcessor {
         cmd = parser.parse(options, args);
         if (cmd.getOptionValues("z") == null || cmd.getOptions().length == 0) {
             formatter.printHelp("Zip code range option", options);
-        }
-        if (cmd.getOptionValues("z") == null || cmd.getOptionValues("z").length < 1) {
+            log.error("Failed to process the params of length {}", args.length);
             throw new ParseException("Not enough parameters provided to process.");
         }
 
         log.info("Parsed the values and returning the array params");
+        log.trace("End validateAndFetchOptions(String[] args)");
         return cmd.getOptionValue("z").split(" ");
     }
 
+    /**
+     * Building the option parser using builder pattern
+     *
+     * @return
+     */
     private Option zipCodeRangeOptions() {
         return Option.builder("z")
                 .longOpt("zipcodes")

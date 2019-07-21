@@ -14,37 +14,38 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Spring boot application start
  */
 @Slf4j
 @SpringBootApplication
 public class ZipCodeChallengeApplication implements CommandLineRunner {
 
-    @Autowired
-    private CommandLineProcessor argsProcessor;
+  @Autowired
+  private CommandLineProcessor argsProcessor;
 
-    @Autowired
-    private ZipExtractorService zipExtractorService;
+  @Autowired
+  private ZipExtractorService zipExtractorService;
 
-    @Autowired
-    private ZipMergeImpl mergeService;
+  @Autowired
+  private ZipMergeImpl mergeService;
 
-    public static void main(String[] args) {
-        SpringApplication.run(ZipCodeChallengeApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(ZipCodeChallengeApplication.class, args);
+  }
 
-    @Override
-    public void run(String... args) throws Exception {
+  @Override
+  public void run(String... args) throws Exception {
+    log.trace("Started application {}.run()", getClass().toString());
+    log.info("Args received count {}", args.length);
 
-        log.info("Args received count {}", args.length);
+    String[] inputParams = argsProcessor.inputProcessor(args);
 
-        String[] inputParams = argsProcessor.inputProcessor(args);
+    Collection<ZipRange> mergeZipRanges =
+            mergeService.mergeZipRanges(zipExtractorService.extractZipRange(inputParams));
 
-        Collection<ZipRange> mergeZipRanges =
-                mergeService.mergeZipRanges(zipExtractorService.extractZipRange(inputParams));
-
-        log.info(
-                "Consolidated Zip Ranges -  {}",
-                mergeZipRanges.stream().map(ZipRange::toString).collect(Collectors.joining(" ")));
-    }
+    log.info(
+            "Consolidated Zip Ranges -  {}",
+            mergeZipRanges.stream().map(ZipRange::toString).collect(Collectors.joining(" ")));
+    log.trace("End application");
+  }
 }

@@ -2,3 +2,15 @@ spring:
   main:
     web-application-type: NONE
     banner-mode: "off"
+  profiles:
+    active: dev
+logging:
+  level:
+    root: INFO
+    org.springframework: ERROR
+    org.hibernate: ERROR
+    javax.management: ERROR
+    com.ash: INFO
+
+  pattern:
+    console: "%d [%t] %-5level %logger : %msg%n"
